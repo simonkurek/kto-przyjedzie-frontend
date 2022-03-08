@@ -1,6 +1,14 @@
 import { NextPage } from "next/types";
+import { useState } from "react";
 
 const Login: NextPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    console.log(email, password);
+  };
+
   return (
     <>
       <div className="bg-white ">
@@ -27,6 +35,7 @@ const Login: NextPage = () => {
                       type="email"
                       name="email"
                       id="email"
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="example@example.com"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md     focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -36,7 +45,7 @@ const Login: NextPage = () => {
                     <div className="flex justify-between mb-2">
                       <label className="text-lg text-gray-600">Hasło</label>
                       <a
-                        href="forgot-password"
+                        href="/auth/forgot-password"
                         className="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline"
                       >
                         Zapomniałeś hasła?
@@ -47,6 +56,7 @@ const Login: NextPage = () => {
                       type="password"
                       name="password"
                       id="password"
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder="Hasło"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md   focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -62,7 +72,7 @@ const Login: NextPage = () => {
                 <p className="mt-6 text-sm text-center text-gray-400">
                   Nie masz konta?{" "}
                   <a
-                    href="signup"
+                    href="/auth/signup"
                     className="text-blue-500 focus:outline-none focus:underline hover:underline"
                   >
                     Zarejestruj się!

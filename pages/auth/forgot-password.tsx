@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+
+  const handleForgotPassword = () => {
+    console.log(email);
+  };
+
   return (
     <>
       <div className="bg-white ">
@@ -27,6 +33,7 @@ const ForgotPassword = () => {
                       type="email"
                       name="email"
                       id="email"
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="example@example.com"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md     focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -42,7 +49,7 @@ const ForgotPassword = () => {
                 <p className="mt-6 text-sm text-center text-gray-400">
                   Pamiętasz hasło?{" "}
                   <a
-                    href="login"
+                    href="/auth/login"
                     className="text-blue-500 focus:outline-none focus:underline hover:underline"
                   >
                     Zaloguj się!

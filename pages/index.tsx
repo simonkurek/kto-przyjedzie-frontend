@@ -14,7 +14,7 @@ const Home: NextPage = () => {
             dziś
             <span className="text-blue-500"> przyjedzie </span>
           </h3>
-          <a href="login" className="m-5">
+          <a href="auth/login" className="m-5">
             <div className="text-2xl mt-8 mx-4 py-4 px-4 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 text-center">
               Zaloguj się!
             </div>

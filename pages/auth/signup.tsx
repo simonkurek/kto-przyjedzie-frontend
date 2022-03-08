@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const handleSignUp = () => {
+    console.log(email, name, password, passwordConfirm);
+  };
+
   return (
     <>
       <div className="bg-white ">
@@ -27,6 +36,7 @@ const SignUp = () => {
                       type="email"
                       name="email"
                       id="email"
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="example@example.com"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md     focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -40,6 +50,7 @@ const SignUp = () => {
                       type="name"
                       name="name"
                       id="name"
+                      onChange={(e) => setName(e.target.value)}
                       placeholder="Imię"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md     focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -54,6 +65,7 @@ const SignUp = () => {
                       type="password"
                       name="password"
                       id="password"
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder="Hasło"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md   focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -70,6 +82,7 @@ const SignUp = () => {
                       type="password"
                       name="password"
                       id="password"
+                      onChange={(e) => setPasswordConfirm(e.target.value)}
                       placeholder="Potwiedź Hasło"
                       className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md   focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
@@ -85,7 +98,7 @@ const SignUp = () => {
                 <p className="mt-6 text-sm text-center text-gray-400">
                   Masz ju konto?{" "}
                   <a
-                    href="login"
+                    href="/auth/login"
                     className="text-blue-500 focus:outline-none focus:underline hover:underline"
                   >
                     Zaloguj się!
