@@ -10,7 +10,7 @@ const Dashboard = () => {
         <NameHeader />
         <Subtitle text="21.03 - 25.03" />
         <div className="py-8">
-          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+          <div className="-ml-4 sm:-mx-8 pl-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 <thead>
@@ -37,23 +37,19 @@ const Dashboard = () => {
                 </thead>
                 <tbody>
                   <Ride
-                    name={"Szymon"}
+                    name={"-----"}
                     date={"poniedziałek"}
-                    status={"zaplanowane"}
+                    status={"nie dotyczy"}
                   />
-                  <Ride
-                    name={"Marcin"}
-                    date={"wtorek"}
-                    status={"zaplanowane"}
-                  />
-                  <Ride name={"Szymon"} date={"środa"} status={"zaplanowane"} />
+                  <Ride name={"-----"} date={"wtorek"} status={"nie dotyczy"} />
+                  <Ride name={"Marcin"} date={"środa"} status={"w trakcie"} />
                   <Ride
                     name={"Marcin"}
                     date={"czwartek"}
                     status={"zaplanowane"}
                   />
                   <Ride
-                    name={"Szymon"}
+                    name={"Marcin"}
                     date={"piątek"}
                     status={"zaplanowane"}
                   />
