@@ -1,47 +1,101 @@
 import React, { useState } from "react";
 import NameHeader from "../../components/name-header";
 import Subtitle from "../../components/subtitle";
+import { IUser } from "../../types/user";
+import { ApiWrapper } from "../../api/wrapper";
+import { IApiReturnType } from "../../types/apiReturnType";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [error, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
 
-  const handleSignUp = () => {
-    console.log(email, name, password, passwordConfirm);
+  const wrapper = new ApiWrapper();
+
+  const createUserApi = async (user: IUser) => {
+    const apiResponse = await wrapper.addUser(user);
+    const response = await apiResponse.json();
+    let returnObj: IApiReturnType = {
+      info: "",
+      errors: [],
+      success: false,
+    };
+    console.log(apiResponse);
+    console.log(response);
+    if (apiResponse.ok) {
+      window.location.replace("/auth/confirm-email");
+    } else {
+      let errorsLog: string[] = [];
+      response.message.forEach((msg: string) => {
+        if (!msg.includes("empty")) {
+          errorsLog.push(msg);
+        }
+      });
+      returnObj.errors = errorsLog;
+    }
+    return returnObj;
+  };
+
+  const clearInputs = () => {
     setEmail("");
     setName("");
     setPassword("");
-    setPasswordConfirm("");
-    setError("jd test");
+    setConfirmPassword("");
+  };
+
+  const handleSignUp = () => {
+    console.log(email, name, password, confirmPassword);
+    const user: IUser = {
+      email,
+      name,
+      password,
+      confirmPassword,
+    };
+    clearInputs();
+
+    createUserApi(user).then((returnObj: IApiReturnType) => {
+      console.log(returnObj);
+      if (returnObj.success) {
+        console.log(returnObj.info);
+      } else {
+        console.log(returnObj.errors);
+        setErrors(returnObj.errors);
+      }
+    });
     window.scrollTo(0, 0);
   };
 
   return (
     <>
       <div className="bg-white ">
-        {error && (
-          <div className="flex w-full max-w-sm mx-auto mt-10 overflow-hidden bg-white rounded-lg shadow-md">
-            <div className="flex items-center justify-center w-12 bg-red-500">
-              <svg
-                className="w-6 h-6 text-white fill-current"
-                viewBox="0 0 40 40"
-                xmlns="http://www.w3.org/2000/svg"
+        {errors &&
+          errors.map((error) => {
+            return (
+              <div
+                className="flex w-full max-w-sm mx-auto mt-10 overflow-hidden bg-white rounded-lg shadow-md"
+                key={error}
               >
-                <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z" />
-              </svg>
-            </div>
+                <div className="flex items-center justify-center w-12 bg-red-500">
+                  <svg
+                    className="w-6 h-6 text-white fill-current"
+                    viewBox="0 0 40 40"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z" />
+                  </svg>
+                </div>
 
-            <div className="px-4 py-2 -mx-3">
-              <div className="mx-3">
-                <span className="font-semibold text-red-500 ">Błąd</span>
-                <p className="text-sm text-gray-600 ">{error}</p>
+                <div className="px-4 py-2 -mx-3">
+                  <div className="mx-3">
+                    <span className="font-semibold text-red-500 ">Błąd</span>
+                    <p className="text-sm text-gray-600 ">{error}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            );
+          })}
         <div className="flex justify-center">
           <div className="flex max-w-md pl-6 pr-6 mt-16 mb-20 mx-auto lg:w-2/6">
             <div className="flex-1">
@@ -108,8 +162,8 @@ const SignUp = () => {
                     type="password"
                     name="password"
                     id="password"
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Potwiedź Hasło"
                     className="block w-full h-14 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md   focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
