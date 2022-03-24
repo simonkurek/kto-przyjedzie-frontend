@@ -42,11 +42,15 @@ const Dashboard = () => {
                     status={"nie dotyczy"}
                   />
                   <Ride name={"-----"} date={"wtorek"} status={"nie dotyczy"} />
-                  <Ride name={"Marcin"} date={"środa"} status={"w trakcie"} />
+                  <Ride
+                    name={"Marcin"}
+                    date={"środa"}
+                    status={"zrealizowano"}
+                  />
                   <Ride
                     name={"Marcin"}
                     date={"czwartek"}
-                    status={"zaplanowane"}
+                    status={"w trakcie"}
                   />
                   <Ride
                     name={"Marcin"}
